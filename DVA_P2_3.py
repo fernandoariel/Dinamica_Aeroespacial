@@ -25,7 +25,7 @@ def stumpC(z):
     return c    
 
 def f_and_g(x,t,ro,a):
-    mu=398600
+    global mu
     z=a*x**2
     #ec. 3.69a
     f=1-(x**2/ro)*stumpC(z)
@@ -35,7 +35,7 @@ def f_and_g(x,t,ro,a):
     return (f,g)
 
 def fDot_and_gDot(x,r,ro,a):
-    mu=398600
+    global mu
     z=a*x**2
     #ec. 3.69c
     fdot=(np.sqrt(mu)/(r*ro))*(z*stumpS(z)-1)*x
@@ -45,7 +45,7 @@ def fDot_and_gDot(x,r,ro,a):
 
 
 def kepler_u(dt,r0,vr0, a):
-    mu=398600
+    global mu
     error=1E-8
     nmax=1000
     # calculo de la anomalia universal
@@ -64,7 +64,7 @@ def kepler_u(dt,r0,vr0, a):
         return x
 
 def rv_from_r0_v0(R0, V0, t):
-    mu=398600  
+    global mu
     #magnitudes de R0 y V0
     r_0=np.linalg.norm(R0)  
     v_0=np.linalg.norm(V0)
@@ -88,7 +88,7 @@ def rv_from_r0_v0(R0, V0, t):
 
     return (R,V)
 
-
+#datos del problema
 
 mu=398600 #parametro gravitacional
 R_0=np.array([1600, 5310, 3800]) #vector R_0 inicial
@@ -96,5 +96,5 @@ V_0=np.array([-7.350, 0.4600, 2.470]) #vector V_0 inicial
 t=3200 #tiempo final en seg
 R,V=rv_from_r0_v0(R_0, V_0, t)
 
-print(R,V)
-
+print('vector posición: ', R)
+print('vector velocidad: ', V)
